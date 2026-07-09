@@ -1,0 +1,35 @@
+{
+  "app": {
+    "name": "NewsBridge",
+    "tagline": "A digital sanctuary for global perspectives.",
+    "description": "Curated news from across the globe, translated and distilled for clarity and deep comprehension."
+  },
+  "nav": {
+    "feed": "Feed",
+    "explore": "Explore",
+    "settings": "Settings"
+  },
+  "readingModes": {
+    "quick": "Quick",
+    "standard": "Standard",
+    "deep": "Deep Dive"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your reading experience and account preferences",
+    "preferences": "Preferences",
+    "language": "Preferred Language",
+    "country": "Default Country",
+    "theme": "Theme",
+    "textSize": "Text Size",
+    "normal": "Normal",
+    "large": "Large"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error loading content",
+    "retry": "Retry",
+    "search": "Search",
+    "select": "Select"
+  }
+}
