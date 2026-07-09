@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NewsBridge | Global News. Any Country. Any Language.</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#444748",
+                    "text-muted": "#666666",
+                    "surface-tint": "#5f5e5e",
+                    "on-secondary-fixed": "#001b3c",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "surface-container-high": "#eae8e4",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#1c1b1b",
+                    "outline": "#747878",
+                    "on-secondary-container": "#294f83",
+                    "error-container": "#ffdad6",
+                    "surface-pure": "#FFFFFF",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-primary-fixed-variant": "#474746",
+                    "on-background": "#1b1c1a",
+                    "on-surface": "#1b1c1a",
+                    "primary": "#000000",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#c8c6c5",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "border-subtle": "#E5E1DA",
+                    "on-primary-container": "#858383",
+                    "surface-bright": "#fbf9f5",
+                    "secondary-container": "#9fc2fe",
+                    "surface-dim": "#dbdad6",
+                    "secondary": "#3a5f94",
+                    "secondary-fixed-dim": "#a7c8ff",
+                    "surface-variant": "#e4e2de",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#311300",
+                    "inverse-surface": "#30312e",
+                    "primary-fixed": "#e5e2e1",
+                    "surface-container-low": "#f5f3ef",
+                    "tertiary-container": "#311300",
+                    "secondary-fixed": "#d5e3ff",
+                    "surface-container-highest": "#e4e2de",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#000000",
+                    "primary-container": "#1c1b1b",
+                    "on-primary": "#ffffff",
+                    "surface": "#fbf9f5",
+                    "background": "#fbf9f5",
+                    "on-tertiary-container": "#ce6700",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "inverse-on-surface": "#f2f0ed",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#c4c7c7",
+                    "on-secondary-fixed-variant": "#1f477b",
+                    "surface-container": "#efeeea"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "container-max": "1200px",
+                    "gutter": "24px",
+                    "article-max": "720px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["\"Source Serif 4\""],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "display-lg-mobile": ["\"Source Serif 4\""],
+                    "headline-md": ["\"Source Serif 4\""],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "caption": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "caption": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fbf9f5;
+            color: #1b1c1a;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .reading-mode-chip input:checked + label {
+            background-color: #1A1A1A;
+            color: #FFFFFF;
+        }
+        .article-card-image {
+            aspect-ratio: 16/9;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #efeeea;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c8c6c5;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Progress Indicator -->
+<div class="fixed top-0 left-0 h-0.5 bg-[#F57C00] z-[60] w-0 transition-all duration-300" id="reading-progress"></div>
+<!-- TopAppBar -->
+<header class="bg-surface fixed top-0 w-full z-50 border-b border-border-subtle duration-200 ease-in-out">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity" data-icon="menu">menu</button>
+<div class="flex items-center gap-3">
+<img alt="NewsBridge Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLsln2BaBpzUm2r5lX0j7eONs5r3x6fQuiBsmIkz1Xp_ugz8zX5laNyKsOtVRMlSyd7k-JlPCLffPFFh7BE3e2wYrmIx_HB4UfJMR1wk_na8MHtayasQTroge-kB3gV0v7oFZYvvI5vMhl4DKgDL7K1LjwdZSfmKZdb_KP7EhaqvriTg_Qij-YNQu7tx9C6SSZGcWFs1155KbP2rkFia18dpKkedQA41DuV0M9fkGqkaCqnVY6h7P5-JLw"/>
+<div class="flex flex-col">
+<span class="font-headline-md text-[20px] leading-tight font-bold tracking-tight text-primary">NewsBridge</span>
+<span class="hidden md:block text-[10px] uppercase tracking-widest text-text-muted font-semibold">Global News. Any Country. Any Language.</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8 text-on-surface-variant font-semibold text-label-caps uppercase">
+<a class="text-primary font-semibold transition-opacity hover:opacity-80" href="#">World</a>
+<a class="hover:opacity-80 transition-opacity" href="#">Technology</a>
+<a class="hover:opacity-80 transition-opacity" href="#">Politics</a>
+<a class="hover:opacity-80 transition-opacity" href="#">Economy</a>
+</div>
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity" data-icon="language">language</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto min-h-screen">
+<!-- Controls Section -->
+<section class="mb-12 space-y-8 animate-in fade-in slide-in-from-top-4 duration-700">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-border-subtle">
+<div class="space-y-4">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary max-w-3xl">
+                        A digital sanctuary for <span class="italic text-on-primary-container">global perspectives</span>.
+                    </h1>
+<p class="text-on-surface-variant font-body-lg max-w-xl">
+                        Curated news from across the globe, translated and distilled for clarity and deep comprehension.
+                    </p>
+</div>
+<div class="flex flex-wrap gap-4 items-center">
+<!-- Country Selector -->
+<div class="relative group">
+<label class="block text-[10px] font-bold uppercase text-text-muted mb-1 tracking-widest">Region</label>
+<select class="bg-surface-container-low border-none rounded-lg py-2 pl-3 pr-10 text-body-md focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+<option selected="">Germany</option>
+<option>United Kingdom</option>
+<option>France</option>
+<option>Japan</option>
+<option>India</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 bottom-2 text-on-surface-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Language Selector -->
+<div class="relative group">
+<label class="block text-[10px] font-bold uppercase text-text-muted mb-1 tracking-widest">Language</label>
+<select class="bg-surface-container-low border-none rounded-lg py-2 pl-3 pr-10 text-body-md focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+<option selected="">Odia</option>
+<option>English</option>
+<option>German</option>
+<option>French</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 bottom-2 text-on-surface-variant pointer-events-none" data-icon="translate">translate</span>
+</div>
+</div>
+</div>
+<!-- Reading Mode Selector -->
+<div class="flex flex-col md:flex-row md:items-center gap-4">
+<span class="text-label-caps font-bold text-text-muted uppercase">Reading Depth</span>
+<div class="flex p-1 bg-surface-container-high rounded-full w-fit">
+<div class="reading-mode-chip">
+<input class="hidden" id="quick" name="reading-mode" type="radio"/>
+<label class="px-6 py-2 rounded-full cursor-pointer text-caption font-semibold transition-all hover:bg-surface-variant block" for="quick">Quick 30</label>
+</div>
+<div class="reading-mode-chip">
+<input checked="" class="hidden" id="standard" name="reading-mode" type="radio"/>
+<label class="px-6 py-2 rounded-full cursor-pointer text-caption font-semibold transition-all hover:bg-surface-variant block" for="standard">Standard 111</label>
+</div>
+<div class="reading-mode-chip">
+<input class="hidden" id="deep" name="reading-mode" type="radio"/>
+<label class="px-6 py-2 rounded-full cursor-pointer text-caption font-semibold transition-all hover:bg-surface-variant block" for="deep">Deep 250</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Vertical Feed (Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Featured Card (Germany - Politics) -->
+<article class="md:col-span-8 group bg-surface-pure rounded-lg overflow-hidden border border-border-subtle hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 cursor-pointer">
+<div class="relative overflow-hidden article-card-image">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A cinematic wide shot of the Berlin government district at twilight. The Spree river reflects the warm, golden lights of the Reichstag building and the modern Chancellery. The atmosphere is calm and prestigious, with a soft misty glow under a deep navy sky. The visual style is premium editorial photography with high clarity and balanced contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA67mGvgwVVGcoNAG8lvLewIHPjjF0Tdex2wzz93GDeVHzLEqXjrMj2ao5m3j0lw6WMDWHU7w6RaUFh9UI_-p5jxuW7Flg8NvbGsSAE5P4Q-KdFkXKtMIj4BKK_1d0EKe1ZbEf7yqVfbS_-8n_dUTcWcDs3A8Cq5DccT5q501SM0ZuR8I3XXkp6evi_YYGDuEr8QhU7WJ9gZKoi6ZhcN6AxEo_GdeTWlo7uiSprvaNlYFTglckbixt"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary text-on-primary px-3 py-1 text-label-caps font-bold uppercase rounded-sm">Politics</span>
+</div>
+</div>
+<div class="p-8 space-y-4">
+<div class="flex items-center gap-3 text-caption text-text-muted">
+<span class="font-bold text-primary">Der Spiegel</span>
+<span class="w-1 h-1 bg-border-subtle rounded-full"></span>
+<span>Oct 24, 2023</span>
+<span class="w-1 h-1 bg-border-subtle rounded-full"></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span> 6 min read</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary leading-tight group-hover:text-tertiary transition-colors">Sustainable Energy Shift: Germany's New Policy</h2>
+<p class="text-on-surface-variant text-body-lg leading-relaxed max-w-2xl">
+                        A detailed look at the latest environmental legislation aimed at carbon neutrality by 2045. The move marks a pivotal moment in European energy sovereignty.
+                    </p>
+<div class="pt-4 flex items-center gap-2 text-primary font-bold text-label-caps uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                        Read Analysis <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</article>
+<!-- Side Card (Germany - Tech) -->
+<article class="md:col-span-4 group bg-surface-pure rounded-lg overflow-hidden border border-border-subtle hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 cursor-pointer h-full flex flex-col">
+<div class="relative article-card-image overflow-hidden h-48 md:h-64">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A close-up of a sophisticated quantum computing laboratory in Munich. Cool blue and sterile white lighting illuminate stainless steel cryostats and a complex web of fiber optic cables. The focus is sharp on a single, glowing component suggesting technological breakthrough. The mood is scientific, precise, and futuristic, following a clean minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnVl35j09IADsQUBNtIKGoMlphrakrjbnRZRqKD0b50FudNM42Ss8Gq3DmZ50uR2jxZg7b2EMvXqelYHx9zKgLikYsasxl7fYWCpwC8iwccZNzyHd_XnzsDR0_5KuwFDrP8nGlSaLeuHNoNm_2Q-5jas_mRhKBqVFtQwQ9jUV1SZNYKHXG8M8JZjeZz3_1MaD9GqIYURpgLV-ocLTLYC-R8yrqKjKZOEcNhPD8SaBr8nZBc6qH5L4d"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary text-on-primary px-3 py-1 text-label-caps font-bold uppercase rounded-sm">Technology</span>
+</div>
+</div>
+<div class="p-6 space-y-3 flex-grow">
+<div class="flex items-center gap-3 text-caption text-text-muted">
+<span class="font-bold text-primary">Deutsche Welle</span>
+<span>Oct 23, 2023</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary leading-tight group-hover:text-tertiary transition-colors">Quantum Computing Breakthrough in Munich</h3>
+<p class="text-on-surface-variant text-body-md line-clamp-3">
+                        Researchers achieve new stability levels in superconducting qubits, paving the way for commercially viable quantum processing units.
+                    </p>
+</div>
+<div class="p-6 pt-0">
+<div class="w-full h-px bg-border-subtle mb-4"></div>
+<div class="flex justify-between items-center">
+<span class="text-caption font-semibold text-text-muted">Tech Deep Dive</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="bookmark">bookmark</span>
+</div>
+</div>
+</article>
+<!-- Secondary Feed Items (Asymmetric Layout) -->
+<div class="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<article class="flex flex-col gap-4 p-4 border-l border-border-subtle hover:bg-surface-container-low transition-colors duration-300">
+<span class="text-[10px] font-bold text-on-tertiary-container uppercase tracking-widest">Economy</span>
+<h4 class="font-headline-sm text-[20px] leading-snug">The Digital Euro: Frankfurt's Bold Financial Experiment</h4>
+<p class="text-caption text-text-muted line-clamp-2">Exploring the implications of a central bank digital currency for the European Union's single market.</p>
+<span class="text-caption font-bold text-primary">Handelsblatt • 2h ago</span>
+</article>
+<article class="flex flex-col gap-4 p-4 border-l border-border-subtle hover:bg-surface-container-low transition-colors duration-300">
+<span class="text-[10px] font-bold text-on-tertiary-container uppercase tracking-widest">Environment</span>
+<h4 class="font-headline-sm text-[20px] leading-snug">Black Forest Reforestation: AI Guiding the New Growth</h4>
+<p class="text-caption text-text-muted line-clamp-2">How predictive modeling is helping ecologists restore ancient woodlands in a changing climate.</p>
+<span class="text-caption font-bold text-primary">Süddeutsche Zeitung • 4h ago</span>
+</article>
+<article class="flex flex-col gap-4 p-4 border-l border-border-subtle hover:bg-surface-container-low transition-colors duration-300">
+<span class="text-[10px] font-bold text-on-tertiary-container uppercase tracking-widest">Culture</span>
+<h4 class="font-headline-sm text-[20px] leading-snug">Modernism Reimagined: The Bauhaus Centennial Tour</h4>
+<p class="text-caption text-text-muted line-clamp-2">A retrospective of the school that defined modern architecture, traveling across Germany this autumn.</p>
+<span class="text-caption font-bold text-primary">Zeit Online • 6h ago</span>
+</article>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface fixed bottom-0 w-full z-50 border-t border-border-subtle duration-200 ease-in-out">
+<div class="flex justify-around items-center h-16 px-margin-mobile">
+<button class="flex flex-col items-center justify-center text-primary transition-all scale-95 active:scale-100">
+<span class="material-symbols-outlined" data-icon="newspaper" style="font-variation-settings: 'FILL' 1;">newspaper</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Feed</span>
+</button>
+<button class="flex flex-col items-center justify-center text-text-muted transition-all scale-95 active:scale-100">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-text-muted transition-all scale-95 active:scale-100">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps uppercase mt-1">Settings</span>
+</button>
+</div>
+</nav>
+<!-- Floating Audio Bar (Contextual) -->
+<div class="fixed bottom-20 md:bottom-8 right-margin-mobile md:right-margin-desktop z-40 animate-in slide-in-from-right duration-500">
+<div class="bg-surface-pure/80 backdrop-blur-xl border border-border-subtle p-3 rounded-full flex items-center gap-3 shadow-lg">
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="pr-4">
+<p class="text-[10px] font-bold uppercase text-text-muted tracking-widest leading-none">Listen to Feed</p>
+<p class="text-caption font-semibold text-primary">Daily Briefing (4m)</p>
+</div>
+</div>
+</div>
+<script>
+        // Reading Progress Script
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement, 
+                  b = document.body,
+                  st = 'scrollTop',
+                  sh = 'scrollHeight';
+            const percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+            document.getElementById('reading-progress').style.width = percent + '%';
+        });
+
+        // Simple Reading Mode Toggle Logic
+        const chips = document.querySelectorAll('.reading-mode-chip label');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => c.classList.remove('bg-primary', 'text-white'));
+                // Visual feedback managed by CSS radio checked state mainly
+            });
+        });
+
+        // Hover atmosphere effect on cards
+        const cards = document.querySelectorAll('article');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Subtle lift or interaction can be added here
+            });
+        });
+    </script>
+</body></html>

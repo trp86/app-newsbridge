@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NewsBridge - Settings</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#444748",
+                    "text-muted": "#666666",
+                    "surface-tint": "#5f5e5e",
+                    "on-secondary-fixed": "#001b3c",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "surface-container-high": "#eae8e4",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#1c1b1b",
+                    "outline": "#747878",
+                    "on-secondary-container": "#294f83",
+                    "error-container": "#ffdad6",
+                    "surface-pure": "#FFFFFF",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-primary-fixed-variant": "#474746",
+                    "on-background": "#1b1c1a",
+                    "on-surface": "#1b1c1a",
+                    "primary": "#000000",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#c8c6c5",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "border-subtle": "#E5E1DA",
+                    "on-primary-container": "#858383",
+                    "surface-bright": "#fbf9f5",
+                    "secondary-container": "#9fc2fe",
+                    "surface-dim": "#dbdad6",
+                    "secondary": "#3a5f94",
+                    "secondary-fixed-dim": "#a7c8ff",
+                    "surface-variant": "#e4e2de",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#311300",
+                    "inverse-surface": "#30312e",
+                    "primary-fixed": "#e5e2e1",
+                    "surface-container-low": "#f5f3ef",
+                    "tertiary-container": "#311300",
+                    "secondary-fixed": "#d5e3ff",
+                    "surface-container-highest": "#e4e2de",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#000000",
+                    "primary-container": "#1c1b1b",
+                    "on-primary": "#ffffff",
+                    "surface": "#fbf9f5",
+                    "background": "#fbf9f5",
+                    "on-tertiary-container": "#ce6700",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "inverse-on-surface": "#f2f0ed",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#c4c7c7",
+                    "on-secondary-fixed-variant": "#1f477b",
+                    "surface-container": "#efeeea"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "container-max": "1200px",
+                    "gutter": "24px",
+                    "article-max": "720px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Source Serif 4"],
+                    "display-lg": ["Source Serif 4"],
+                    "display-lg-mobile": ["Source Serif 4"],
+                    "headline-md": ["Source Serif 4"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "caption": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "caption": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ios-list-item:last-child {
+            border-bottom: none;
+        }
+        .transition-all-custom {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-secondary-container">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-container-highest fixed top-0 w-full z-50 border-b border-border-subtle dark:border-outline-variant">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-on-surface hover:opacity-80 transition-opacity">menu</button>
+<h1 class="font-headline-md text-headline-md font-bold tracking-tight text-primary dark:text-on-surface">NewsBridge</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-on-surface hover:opacity-80 transition-opacity">language</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile md:px-margin-desktop max-w-[720px] mx-auto min-h-screen">
+<!-- Header -->
+<div class="mb- base * 8">
+<h2 class="font-headline-md text-headline-md text-primary mb-2">Settings</h2>
+<p class="font-body-md text-text-muted">Manage your reading experience and account preferences.</p>
+</div>
+<!-- Section: Preferences -->
+<section class="mb-12">
+<h3 class="font-label-caps text-label-caps text-text-muted mb-4 uppercase tracking-widest">Preferences</h3>
+<div class="bg-surface-pure rounded-xl border border-border-subtle overflow-hidden shadow-sm">
+<!-- Preferred Language -->
+<div class="ios-list-item flex items-center justify-between p-4 border-b border-border-subtle hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">translate</span>
+<span class="font-body-md font-semibold">Preferred Language</span>
+</div>
+<div class="flex items-center gap-2">
+<select class="bg-transparent border-none focus:ring-0 text-secondary font-semibold text-right cursor-pointer appearance-none">
+<option value="odia">Odia</option>
+<option value="english">English</option>
+<option value="german">German</option>
+</select>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+</div>
+<!-- Default Country -->
+<div class="ios-list-item flex items-center justify-between p-4 border-b border-border-subtle hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">public</span>
+<span class="font-body-md font-semibold">Default Country</span>
+</div>
+<div class="flex items-center gap-2">
+<select class="bg-transparent border-none focus:ring-0 text-secondary font-semibold text-right cursor-pointer appearance-none">
+<option value="germany">Germany</option>
+<option value="india">India</option>
+<option value="usa">USA</option>
+</select>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+</div>
+<!-- Theme Toggle -->
+<div class="ios-list-item flex items-center justify-between p-4 border-b border-border-subtle">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">dark_mode</span>
+<span class="font-body-md font-semibold">Theme</span>
+</div>
+<button aria-checked="false" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out bg-surface-variant focus:outline-none" id="themeToggle" role="switch">
+<span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out translate-x-0" id="toggleKnob"></span>
+</button>
+</div>
+<!-- Text Size Segmented Control -->
+<div class="ios-list-item flex flex-col md:flex-row md:items-center justify-between p-4 border-b border-border-subtle gap-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">format_size</span>
+<span class="font-body-md font-semibold">Text Size</span>
+</div>
+<div class="flex p-1 bg-surface-container rounded-lg w-full md:w-auto">
+<button class="flex-1 px-6 py-1.5 rounded-md bg-white shadow-sm text-primary font-semibold text-caption transition-all">Normal</button>
+<button class="flex-1 px-6 py-1.5 rounded-md text-text-muted hover:text-primary font-semibold text-caption transition-all">Large</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Future Features -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-label-caps text-label-caps text-text-muted uppercase tracking-widest">Coming Soon</h3>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter">Labs</span>
+</div>
+<div class="bg-surface-container-low rounded-xl border border-border-subtle overflow-hidden opacity-60">
+<!-- Audio Briefings -->
+<div class="flex items-center justify-between p-4 border-b border-border-subtle cursor-not-allowed">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">headset</span>
+<div class="flex flex-col">
+<span class="font-body-md font-semibold text-text-muted">Audio Briefings</span>
+<span class="text-caption text-text-muted">AI-generated daily summaries</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">lock</span>
+</div>
+<!-- Personalized Feed -->
+<div class="flex items-center justify-between p-4 border-b border-border-subtle cursor-not-allowed">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">auto_awesome</span>
+<div class="flex flex-col">
+<span class="font-body-md font-semibold text-text-muted">Personalized Feed</span>
+<span class="text-caption text-text-muted">Custom logic based on interests</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">lock</span>
+</div>
+<!-- Multi-region Digest -->
+<div class="flex items-center justify-between p-4 cursor-not-allowed">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">travel_explore</span>
+<div class="flex flex-col">
+<span class="font-body-md font-semibold text-text-muted">Multi-region Digest</span>
+<span class="text-caption text-text-muted">Cross-border news comparison</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">lock</span>
+</div>
+</div>
+<p class="mt-4 text-caption text-text-muted italic px-2">These features are currently in development to ensure the highest editorial standards.</p>
+</section>
+<!-- Footer Visual -->
+<div class="mt-16 flex flex-col items-center justify-center text-center">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-surface-variant">verified_user</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary mb-1">NewsBridge Secure</p>
+<p class="font-caption text-caption text-text-muted">Version 1.4.2 (Stable)<br/>© 2024 Informed Quiet Media</p>
+</div>
+</main>
+<!-- Navigation Shell (BottomNavBar for Mobile) -->
+<nav class="md:hidden bg-surface dark:bg-surface-container-highest fixed bottom-0 w-full z-50 border-t border-border-subtle dark:border-outline-variant">
+<div class="flex justify-around items-center h-16 px-margin-mobile">
+<button class="flex flex-col items-center justify-center text-text-muted dark:text-on-surface-variant scale-95 active:scale-100 transition-all hover:text-primary">
+<span class="material-symbols-outlined">newspaper</span>
+<span class="font-label-caps text-label-caps mt-1">Feed</span>
+</button>
+<button class="flex flex-col items-center justify-center text-text-muted dark:text-on-surface-variant scale-95 active:scale-100 transition-all hover:text-primary">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-caps text-label-caps mt-1">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary dark:text-on-surface scale-95 active:scale-100 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-caps text-label-caps mt-1 font-semibold">Settings</span>
+</button>
+</div>
+</nav>
+<!-- SideNav Anchor Logic (Simulated for Large Screens) -->
+<div class="hidden md:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-20 border-r border-border-subtle bg-surface z-40 items-center py-8 gap-10">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">newspaper</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">explore</button>
+<button class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">settings</button>
+<div class="mt-auto mb-8">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">help_outline</button>
+</div>
+</div>
+<script>
+        // Micro-interaction for Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const toggleKnob = document.getElementById('toggleKnob');
+        let isDarkMode = false;
+
+        themeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                themeToggle.classList.remove('bg-surface-variant');
+                themeToggle.classList.add('bg-primary');
+                toggleKnob.classList.add('translate-x-5');
+                document.documentElement.classList.add('dark');
+            } else {
+                themeToggle.classList.add('bg-surface-variant');
+                themeToggle.classList.remove('bg-primary');
+                toggleKnob.classList.remove('translate-x-5');
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Toggle focus/hover effects for iOS list items
+        document.querySelectorAll('.ios-list-item').forEach(item => {
+            item.addEventListener('mousedown', () => {
+                item.style.backgroundColor = 'var(--surface-container-high)';
+            });
+            item.addEventListener('mouseup', () => {
+                item.style.backgroundColor = '';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.backgroundColor = '';
+            });
+        });
+    </script>
+</body></html>

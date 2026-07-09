@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NewsBridge - Explore Global News</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#444748",
+                    "text-muted": "#666666",
+                    "surface-tint": "#5f5e5e",
+                    "on-secondary-fixed": "#001b3c",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "surface-container-high": "#eae8e4",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#1c1b1b",
+                    "outline": "#747878",
+                    "on-secondary-container": "#294f83",
+                    "error-container": "#ffdad6",
+                    "surface-pure": "#FFFFFF",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-primary-fixed-variant": "#474746",
+                    "on-background": "#1b1c1a",
+                    "on-surface": "#1b1c1a",
+                    "primary": "#000000",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#c8c6c5",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "border-subtle": "#E5E1DA",
+                    "on-primary-container": "#858383",
+                    "surface-bright": "#fbf9f5",
+                    "secondary-container": "#9fc2fe",
+                    "surface-dim": "#dbdad6",
+                    "secondary": "#3a5f94",
+                    "secondary-fixed-dim": "#a7c8ff",
+                    "surface-variant": "#e4e2de",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#311300",
+                    "inverse-surface": "#30312e",
+                    "primary-fixed": "#e5e2e1",
+                    "surface-container-low": "#f5f3ef",
+                    "tertiary-container": "#311300",
+                    "secondary-fixed": "#d5e3ff",
+                    "surface-container-highest": "#e4e2de",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#000000",
+                    "primary-container": "#1c1b1b",
+                    "on-primary": "#ffffff",
+                    "surface": "#fbf9f5",
+                    "background": "#fbf9f5",
+                    "on-tertiary-container": "#ce6700",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "inverse-on-surface": "#f2f0ed",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#c4c7c7",
+                    "on-secondary-fixed-variant": "#1f477b",
+                    "surface-container": "#efeeea"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "container-max": "1200px",
+                    "gutter": "24px",
+                    "article-max": "720px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["\"Source Serif 4\""],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "display-lg-mobile": ["\"Source Serif 4\""],
+                    "headline-md": ["\"Source Serif 4\""],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "caption": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "caption": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fbf9f5;
+            color: #1b1c1a;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .country-card:hover .country-flag {
+            transform: scale(1.05);
+        }
+        .glass-audio {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(229, 225, 218, 0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-container-highest fixed top-0 w-full z-50 border-b border-border-subtle dark:border-outline-variant duration-200 ease-in-out">
+<div class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-on-surface hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold tracking-tight text-primary dark:text-on-surface">NewsBridge</h1>
+</div>
+<!-- Desktop Nav Cluster -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-text-muted font-body-md hover:opacity-80 transition-opacity" href="#">World</a>
+<a class="text-on-surface-variant dark:text-text-muted font-body-md hover:opacity-80 transition-opacity" href="#">Technology</a>
+<a class="text-on-surface-variant dark:text-text-muted font-body-md hover:opacity-80 transition-opacity" href="#">Politics</a>
+<a class="text-primary dark:text-on-surface font-semibold hover:opacity-80 transition-opacity" href="#">Explore</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-on-surface hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Reading Progress Bar -->
+<div class="fixed top-16 left-0 h-[2px] bg-[#F57C00] z-50 transition-all duration-300" id="progress-bar" style="width: 0%"></div>
+<main class="pt-24 pb-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero Title Section -->
+<section class="mb-12">
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-4 text-primary">Explore Global News</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-article-max">Deep dive into local perspectives. Select a country to see curated headlines from the world's most trusted editorial sources.</p>
+</section>
+<!-- Search Bar Section -->
+<section class="mb-16">
+<div class="relative max-w-article-max group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-b-2 border-border-subtle focus:border-primary focus:ring-0 px-12 py-4 text-body-lg placeholder:text-text-muted transition-all duration-300" placeholder="Search Countries" type="text"/>
+</div>
+<!-- Trending Chips -->
+<div class="flex flex-wrap gap-2 mt-6">
+<span class="font-label-caps text-label-caps text-text-muted self-center mr-2">TRENDING:</span>
+<button class="bg-[#F3F0E9] text-primary px-4 py-1.5 rounded-full font-label-caps text-label-caps hover:bg-surface-variant transition-colors uppercase tracking-widest">Ukraine</button>
+<button class="bg-[#F3F0E9] text-primary px-4 py-1.5 rounded-full font-label-caps text-label-caps hover:bg-surface-variant transition-colors uppercase tracking-widest">Climate Summit</button>
+<button class="bg-[#F3F0E9] text-primary px-4 py-1.5 rounded-full font-label-caps text-label-caps hover:bg-surface-variant transition-colors uppercase tracking-widest">G7 Meeting</button>
+</div>
+</section>
+<!-- Country Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Germany -->
+<div class="country-card bg-surface-pure border border-border-subtle p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 cursor-pointer group">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container overflow-hidden rounded-sm country-flag transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist close-up of a German flag fabric with soft daylight hitting the texture. The aesthetic is editorial and high-end, using deep blacks, vibrant reds, and rich golds in a modern, light-mode studio setting. The lighting is soft and ambient, emphasizing premium textile quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxGAhowFy68p8QvwHRHHJh0wMnDGzZgsicXRsyu1D1BR-ga7qkkGNOWED8Se1he4eQ1CqlRL21UOx6TiqWBBrEjITO-bmNGiQ8QwC5_e0qCelVvbBiCiZRw4Mg3KdXcJx77iHHCdtjyq8wm9QWjf-DcxcXQCrvZJ4J5nJC7QJenl6c0GePT88EF_r12H8H0ogHALOJHw4qqFE77b3WYseVLORxh8wzLHyUz3kkRjKjj1bBTTp3exGj"/>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Germany</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">New economic measures aimed at sustainable energy transition approved in Berlin...</p>
+<div class="mt-4 pt-4 border-t border-border-subtle flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-text-muted uppercase">3 mins ago</span>
+</div>
+</div>
+<!-- USA -->
+<div class="country-card bg-surface-pure border border-border-subtle p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 cursor-pointer group">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container overflow-hidden rounded-sm country-flag transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="A high-end editorial shot of the United States flag stars and stripes, rendered with a minimalist focus on geometry and fabric texture. The colors are crisp navy blue, deep crimson, and pure white. The lighting is professional and bright, creating a clean light-mode atmosphere consistent with luxury journalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpPx_AEqQZTRIPRgUeg8jIOopOsTwLTMdL6_Clq6LPXGtCk5_PLTcgOmxzeY5YnKiR_jxhJtMTSIkngoMsTLi7fPiGMw8p7yg_p8yFJRmvGj1NeT7CHig4BRPOxuFLB-wVGVsTspGy1dHnV05xpvKtZCiyBBUmxRCvCkjxkPXR3gkrhqDPsPrLGYMxr7C1aGGSUX5afuRzh6NDPexCUzma9Nwmzfap1Kl7jGKCqiel_zKszdaNIpAh"/>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">USA</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Market fluctuations as Federal Reserve indicates potential shifts in fiscal policy...</p>
+<div class="mt-4 pt-4 border-t border-border-subtle flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-text-muted uppercase">12 mins ago</span>
+</div>
+</div>
+<!-- Japan -->
+<div class="country-card bg-surface-pure border border-border-subtle p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 cursor-pointer group">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container overflow-hidden rounded-sm country-flag transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="A minimalist and serene depiction of the Japanese flag, focusing on the crimson circle against a pristine white textured background. The image is bright and airy, utilizing a high-key lighting style that reflects a quiet, sophisticated aesthetic. The composition is centered and balanced, suggesting calm and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxtFXICuC9OZgDXnf1i395unJXaFSN4MhJSQTe-1mq9ED1F_GhSwAek_JwEfBMkESSrby_VMppP7erBLA6DybCrrF23ms69cMNLh1JnkBEs7l5nZIs3nfgNdSn_qazQjefYcFHh8QVFBiTXt3fwT5DeutGz-micPN9A0-Hnnh0jx6O49qo_EXYyygbkquH3Rown1MUYzKuRULRILfltqCG5qiYwHXzNaCbXEYz6_HP7Vj-Sc3Pb1-3"/>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Japan</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Tech giants in Tokyo unveil breakthrough in modular quantum computing systems...</p>
+<div class="mt-4 pt-4 border-t border-border-subtle flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-text-muted uppercase">1 hour ago</span>
+</div>
+</div>
+<!-- France -->
+<div class="country-card bg-surface-pure border border-border-subtle p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 cursor-pointer group">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container overflow-hidden rounded-sm country-flag transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="An artistic, minimalist focus on the tricolor flag of France. The blue, white, and red bands are captured with high-fidelity textile detail. The environment is a bright, modern gallery space with soft shadows and natural light. The aesthetic is clean and premium, embodying a sense of historical prestige and contemporary focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEaJYbhivde4MbgIuq_tFYfqdsx-wYZkvFIVyEhFqLEGN9BPoFGpO73VGXcxWKrbUqHYA-JdqdIgpar3voMi9gbvZqwBQA-gK6ATm4eYIrEFgWkiFVXE3b0JkZW9aNLLPFUk5k5dCY8-3xx2JwA7jD9NGjNLWNEm6D0BH5gvvm_kFP_bq6TfGfFrvpSUnS-bGl2oLr4PTfY7N7xIE6Vkdr-hFJScXL192HzVr2TVggT8dWVXWaSTC_"/>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">France</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Cultural preservation debate reaches the Senate as new architectural bills are proposed...</p>
+<div class="mt-4 pt-4 border-t border-border-subtle flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-text-muted uppercase">2 hours ago</span>
+</div>
+</div>
+<!-- India -->
+<div class="country-card bg-surface-pure border border-border-subtle p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 cursor-pointer group">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container overflow-hidden rounded-sm country-flag transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="A sophisticated editorial photograph of the Indian flag, highlighting the saffron, white, and green bands with the Ashoka Chakra. The lighting is diffused and bright, creating a clean light-mode look. The textures are rich yet subtle, placed against a minimalist ivory background to emphasize global significance and progress." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ4jKdf4syk7WUUrXTvJsl3YsiteysnQvqlkfOYoMUO9NgngXacQJ5gyBmyG5b-9XOKW1T9S7QGHUZPYMuneCf2eGde3QrZ-yJf_Cx1Nme9W9bSu7XJQdrhlOgEzEqxaPhqbCGjqZ5D2vUibn3f17Jo0MHVRyxPwlYXM_BIDvn-RPBjq-Lby_7tB_wFZx2gGhmsv0EIrAWMjXOzNhb03RnG_tAVW-D_AyTek1aActaJZbb6hqke3Qs"/>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">India</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">India strengthens trade partnerships with ASEAN nations in landmark summit...</p>
+<div class="mt-4 pt-4 border-t border-border-subtle flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-text-muted uppercase">4 hours ago</span>
+</div>
+</div>
+<!-- UK -->
+<div class="country-card bg-surface-pure border border-border-subtle p-6 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 cursor-pointer group">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 bg-surface-container overflow-hidden rounded-sm country-flag transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="A minimalist interpretation of the Union Jack, showcasing the intersecting lines in deep navy, vibrant red, and crisp white. The image has an editorial, high-end quality with a focus on geometric precision and soft, ambient lighting. The background is a warm-white minimalist surface, maintaining the design's quiet sanctuary feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDCsCaJQkrgdn9Uvks4aGQwZO0scYdlpo7b7TiZuPn5rjgBP6q_eoU7vxK_NXJTF5oq3aR0xsyEkO-wmQVrMlSMRV2YVg42RRD9gpQJvw4WzFFnBf12GNYMgBFhbbacW6YNXg-rLIeORUfso8k9sDQ81Ex6krwqrvYhZKfLfjk8nL3HfZsEqIa7kS2dKPz9Z4_TmKni9SI7I3pydEHd1iZtgYKrRnGczgeLaNDkMXaV06M4lhgIko7"/>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">UK</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">London Stock Exchange sees record activity following new fintech regulations...</p>
+<div class="mt-4 pt-4 border-t border-border-subtle flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-text-muted uppercase">6 hours ago</span>
+</div>
+</div>
+</section>
+<!-- World Map Visualizer Placeholder -->
+<section class="mt-24 mb-12 h-[400px] relative overflow-hidden rounded-xl bg-surface-container">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+<div class="text-center p-8 bg-surface-pure/80 backdrop-blur-md rounded-lg shadow-sm border border-border-subtle max-w-sm">
+<h4 class="font-headline-sm text-headline-sm text-primary mb-2">Interactive Global Pulse</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time heat map of news activity across the globe.</p>
+</div>
+</div>
+<div class="w-full h-full opacity-40 grayscale contrast-125" data-alt="A minimalist and highly stylized world map rendered in a monochrome line-art style. The map uses thin, elegant strokes on a soft cream-colored background. There are subtle glowing points indicating global activity. The lighting is uniform and bright, matching a premium editorial layout and conveying a sense of global interconnectedness." data-location="world" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg')"></div>
+</section>
+</main>
+<!-- Navigation Shells -->
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface dark:bg-surface-container-highest border-t border-border-subtle dark:border-outline-variant">
+<div class="flex justify-around items-center h-16 px-margin-mobile">
+<a class="flex flex-col items-center justify-center text-text-muted dark:text-on-surface-variant hover:text-primary transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="newspaper">newspaper</span>
+<span class="font-label-caps text-label-caps uppercase">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-on-surface font-semibold transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-caps text-label-caps uppercase">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted dark:text-on-surface-variant hover:text-primary transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps uppercase">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Glass Audio Player (Docked Feature) -->
+<div class="fixed bottom-20 md:bottom-8 right-margin-mobile md:right-margin-desktop z-40 glass-audio px-6 py-4 rounded-full shadow-lg border border-border-subtle flex items-center gap-4 max-w-xs md:max-w-md animate-in slide-in-from-bottom-4 duration-500">
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="flex-1 overflow-hidden">
+<p class="font-label-caps text-label-caps text-text-muted uppercase tracking-tighter">Listen to Briefing</p>
+<p class="font-body-md text-body-md text-primary truncate font-semibold">Global Afternoon Update — 5 min</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<script>
+        // Micro-interaction: Progress bar on scroll
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+
+        // Smooth Reveal Interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.country-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+
+        // Search Bar Focus Interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.01]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.01]');
+        });
+    </script>
+</body></html>
