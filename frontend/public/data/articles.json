@@ -1,0 +1,21 @@
+{
+  "articles": [
+    {
+      "id": "1",
+      "source": "NewsBridge Team",
+      "category": "technology",
+      "publishedAt": "2026-07-10T14:30:00Z",
+      "english": {
+        "title": "NewsBridge Successfully Connects to Neon Database",
+        "summary_30": "Backend ingestion pipeline operational with Postgres.",
+        "summary_111": "NewsBridge backend migrated to Neon serverless Postgres. RSS pipeline collects from 5 German sources with seamless deduplication.",
+        "summary_250": "NewsBridge integrated with Neon Postgres. Backend ingestion fully operational, collecting from Tagesschau, Der Spiegel, Deutsche Welle, Handelsblatt. Processed 95 articles, detected 94 duplicates. All operations working flawlessly."
+      },
+      "translations": {}
+    }
+  ],
+  "metadata": {
+    "totalArticles": 1,
+    "lastUpdated": "2026-07-10T14:30:00Z"
+  }
+}
