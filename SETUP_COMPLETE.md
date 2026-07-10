@@ -1,5 +1,14 @@
 # Setup Complete ✅
 
+## 🪟 Windows Users Note
+
+This guide supports **three** command-line environments:
+- **PowerShell** (Recommended for Windows 11) - Use `.\venv\Scripts\Activate.ps1`
+- **Git Bash** (POSIX-like) - Use `source venv/Scripts/activate`
+- **CMD** (Classic) - Use `venv\Scripts\activate.bat`
+
+Commands are shown for both PowerShell and Git Bash where they differ.
+
 ## Environment Setup
 
 ### Python Virtual Environment
@@ -44,12 +53,28 @@ LOG_FORMAT=json
 ## How to Use
 
 ### Activate Virtual Environment
+
+**Windows PowerShell:**
+```powershell
+cd backend
+.\venv\Scripts\Activate.ps1
+```
+
+**Windows Git Bash:**
 ```bash
 cd backend
-source venv/Scripts/activate  # On Windows Git Bash
+source venv/Scripts/activate
+```
+
+**Windows CMD:**
+```cmd
+cd backend
+venv\Scripts\activate.bat
 ```
 
 ### Run Scripts
+
+**PowerShell / Git Bash / CMD (same for all):**
 ```bash
 # Initialize database (already done)
 python scripts/init_db.py
@@ -98,34 +123,62 @@ app-newsbridge/
 
 ## Next Steps
 
-1. **Test the ingestion pipeline**:
-   ```bash
-   cd backend
-   source venv/Scripts/activate
-   python scripts/test_ingestion.py
-   ```
+### 1. Test the ingestion pipeline
 
-2. **Test editorial processing**:
-   ```bash
-   python scripts/test_editorial.py
-   ```
+**PowerShell:**
+```powershell
+cd backend
+.\venv\Scripts\Activate.ps1
+python scripts/test_ingestion.py
+```
 
-3. **Run tests**:
-   ```bash
-   pytest
-   ```
+**Git Bash:**
+```bash
+cd backend
+source venv/Scripts/activate
+python scripts/test_ingestion.py
+```
 
-4. **Type checking**:
-   ```bash
-   mypy src/
-   ```
+### 2. Test editorial processing
+```bash
+python scripts/test_editorial.py
+```
 
-5. **Linting**:
-   ```bash
-   ruff check src/
-   ```
+### 3. Run tests
+```bash
+pytest
+```
+
+### 4. Type checking
+```bash
+mypy src/
+```
+
+### 5. Linting
+```bash
+ruff check src/
+```
 
 ## Troubleshooting
+
+### PowerShell Execution Policy Error
+If you see `Activate.ps1 cannot be loaded because running scripts is disabled`:
+
+**Option 1 - Temporary (Recommended):**
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+.\venv\Scripts\Activate.ps1
+```
+
+**Option 2 - Permanent (Admin required):**
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+**Option 3 - Use Git Bash instead:**
+```bash
+source venv/Scripts/activate
+```
 
 ### Database Connection Issues
 If you see connection errors:
@@ -135,6 +188,15 @@ If you see connection errors:
 
 ### Import Errors
 If Python can't find modules:
+
+**PowerShell:**
+```powershell
+cd backend
+.\venv\Scripts\Activate.ps1
+pip install -e .
+```
+
+**Git Bash:**
 ```bash
 cd backend
 source venv/Scripts/activate
@@ -154,9 +216,49 @@ python scripts/init_db.py
 - [CLAUDE.md](CLAUDE.md) - Project coding guidelines
 - [pyproject.toml](backend/pyproject.toml) - Dependency specifications
 
+## Quick Start Cheat Sheet
+
+### PowerShell Quick Start
+```powershell
+# Navigate to backend
+cd C:\Users\TPRADHA\OneDrive` - Daimler` Truck\Workspace\Documents\Docs\Personal\PetProject\app-newsbridge\backend
+
+# Activate virtual environment (if execution policy error, see Troubleshooting)
+.\venv\Scripts\Activate.ps1
+
+# Verify setup
+python scripts\init_db.py
+
+# Run first test
+python scripts\test_ingestion.py
+
+# Deactivate when done
+deactivate
+```
+
+### Git Bash Quick Start
+```bash
+# Navigate to backend
+cd "/c/Users/TPRADHA/OneDrive - Daimler Truck/Workspace/Documents/Docs/Personal/PetProject/app-newsbridge/backend"
+
+# Activate virtual environment
+source venv/Scripts/activate
+
+# Verify setup
+python scripts/init_db.py
+
+# Run first test
+python scripts/test_ingestion.py
+
+# Deactivate when done
+deactivate
+```
+
 ---
 
-**Setup Date**: 2026-07-10
-**Python**: 3.12.10
-**Database**: Neon Postgres (eu-central-1)
+**Setup Date**: 2026-07-10  
+**Python**: 3.12.10  
+**Database**: Neon Postgres (eu-central-1)  
+**Platform**: Windows 11 Enterprise  
+**Shells Supported**: PowerShell, Git Bash, CMD  
 **Status**: ✅ Ready for development
