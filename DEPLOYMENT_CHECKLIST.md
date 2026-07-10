@@ -2,8 +2,9 @@
 
 ## Before You Start
 - [ ] Code pushed to GitHub
-- [ ] Neon database connection string ready
-- [ ] OpenRouter API key ready
+- [ ] Neon database connection string ready (from Neon console)
+- [ ] Google Gemini API key ready (from https://makersuite.google.com/app/apikey)
+- [ ] Telegram Bot Token (optional, from @BotFather on Telegram)
 
 ---
 
@@ -19,11 +20,23 @@
   - Start Command: `uvicorn src.api.main:app --host 0.0.0.0 --port $PORT`
   - Plan: Free
 
-### Environment Variables
+### Environment Variables (Required)
 - [ ] `DATABASE_URL` = (your Neon connection string)
-- [ ] `OPENROUTER_API_KEY` = (your OpenRouter key)
+- [ ] `GEMINI_API_KEY` = (your Google Gemini API key)
+- [ ] `GEMINI_SUMMARIZATION_MODEL` = `gemini-2.5-flash`
+- [ ] `GEMINI_TRANSLATION_MODEL` = `gemini-1.5-flash-002`
 - [ ] `PORT` = `8002`
-- [ ] `ENVIRONMENT` = `production`
+- [ ] `LOG_LEVEL` = `INFO`
+- [ ] `LOG_FORMAT` = `json`
+
+### Environment Variables (Optional)
+- [ ] `TELEGRAM_BOT_TOKEN` = (your Telegram bot token, if using)
+- [ ] `TELEGRAM_CHANNEL_ID` = (your channel ID, if using)
+- [ ] `DAILY_PUBLISH_TIME` = `06:00`
+- [ ] `MAX_RETRIES_PER_MODEL` = `2`
+- [ ] `REQUEST_TIMEOUT_SECONDS` = `30`
+- [ ] `MIN_QUALITY_SCORE` = `0.7`
+- [ ] `TOP_STORIES_COUNT` = `5`
 
 ### Deploy
 - [ ] Click "Create Web Service"

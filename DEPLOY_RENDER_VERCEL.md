@@ -3,7 +3,8 @@
 ## Prerequisites
 - ✅ GitHub repository with code pushed
 - ✅ Neon database already set up
-- ✅ OpenRouter API key
+- ✅ Google Gemini API key
+- ✅ Telegram Bot Token (optional, for notifications)
 
 ---
 
@@ -35,11 +36,30 @@
 ### 3. Add Environment Variables
 In Render dashboard, add these environment variables:
 
+**Required:**
 ```
-DATABASE_URL=your_neon_connection_string
-OPENROUTER_API_KEY=your_openrouter_key
+DATABASE_URL=postgresql://neondb_owner:xxx@ep-xxx.neon.tech/neondb?sslmode=require
+GEMINI_API_KEY=your_google_gemini_api_key
+GEMINI_SUMMARIZATION_MODEL=gemini-2.5-flash
+GEMINI_TRANSLATION_MODEL=gemini-1.5-flash-002
 PORT=8002
-ENVIRONMENT=production
+LOG_LEVEL=INFO
+LOG_FORMAT=json
+```
+
+**Optional (for Telegram notifications):**
+```
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_CHANNEL_ID=@your_channel
+```
+
+**Optional (advanced settings):**
+```
+DAILY_PUBLISH_TIME=06:00
+MAX_RETRIES_PER_MODEL=2
+REQUEST_TIMEOUT_SECONDS=30
+MIN_QUALITY_SCORE=0.7
+TOP_STORIES_COUNT=5
 ```
 
 **Get your Neon connection string:**
