@@ -24,24 +24,24 @@ def main() -> None:
     # Initialize database
     print("\n1. Initializing database...")
     init_database()
-    print("   ✓ Database ready")
+    print("   [OK] Database ready")
 
     # Collect articles
     print("\n2. Collecting articles from 5 German news sources...")
     print("   Sources: Tagesschau, SZ, Spiegel, DW, Handelsblatt")
     articles = collect_articles()
-    print(f"   ✓ Collected {len(articles)} articles")
+    print(f"   [OK] Collected {len(articles)} articles")
 
     # Deduplicate
     print("\n3. Deduplicating articles...")
     unique, duplicates = mark_duplicates(articles)
-    print(f"   ✓ Unique: {len(unique)}")
-    print(f"   ✓ Duplicates: {len(duplicates)}")
+    print(f"   [OK] Unique: {len(unique)}")
+    print(f"   [OK] Duplicates: {len(duplicates)}")
 
     # Store in database
     print("\n4. Storing unique articles in database...")
     inserted = ArticleRepository.insert_articles(unique)
-    print(f"   ✓ Inserted {inserted} articles")
+    print(f"   [OK] Inserted {inserted} articles")
 
     # Show statistics
     print("\n5. Database statistics:")
