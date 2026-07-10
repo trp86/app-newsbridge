@@ -28,6 +28,30 @@ def get_placeholder() -> str:
     return "%s" if _use_postgres() else "?"
 
 
+def get_scalar(result: Any, index: int | str = 0) -> Any:
+    """Get a scalar value from a database result row.
+
+    Handles both dict (Postgres with dict_row) and tuple/Row (SQLite with Row factory).
+
+    Args:
+        result: Result row from cursor.fetchone()
+        index: Column index (int for tuple) or name (str for dict)
+
+    Returns:
+        The value at the specified index/column
+
+    Example:
+        result = cursor.fetchone()
+        count = get_scalar(result, "count")  # Works for both Postgres and SQLite
+    """
+    if isinstance(result, dict):
+        # Postgres dict_row
+        return result[index] if isinstance(index, str) else list(result.values())[index]
+    else:
+        # SQLite Row or tuple
+        return result[index]
+
+
 @contextmanager
 def get_db_connection() -> Generator[Any, None, None]:
     """Context manager for database connections (Postgres or SQLite).

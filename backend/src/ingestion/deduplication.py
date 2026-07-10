@@ -2,7 +2,7 @@
 
 import structlog
 
-from src.core.database import get_db_connection, get_placeholder
+from src.core.database import get_db_connection, get_placeholder, get_scalar
 
 logger = structlog.get_logger()
 
@@ -25,10 +25,11 @@ def is_duplicate(content_hash: str) -> bool:
         cursor = conn.cursor()
         placeholder = get_placeholder()
         cursor.execute(
-            f"SELECT COUNT(*) FROM articles WHERE content_hash = {placeholder}",
+            f"SELECT COUNT(*) as count FROM articles WHERE content_hash = {placeholder}",
             (content_hash,),
         )
-        count = cursor.fetchone()[0]
+        result = cursor.fetchone()
+        count = get_scalar(result, "count")
 
     is_dup = count > 0
 
