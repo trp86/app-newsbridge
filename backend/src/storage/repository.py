@@ -4,7 +4,7 @@ from datetime import datetime
 
 import structlog
 
-from src.core.database import get_db_connection, get_placeholder
+from src.core.database import get_db_connection, get_placeholder, get_scalar
 from src.core.schemas import RawArticle
 
 logger = structlog.get_logger()
@@ -186,12 +186,12 @@ class ArticleRepository:
             cursor = conn.cursor()
 
             # Total count
-            cursor.execute("SELECT COUNT(*) FROM articles")
-            total = cursor.fetchone()[0]
+            cursor.execute("SELECT COUNT(*) as count FROM articles")
+            total = get_scalar(cursor.fetchone(), "count")
 
             # Unique (non-duplicate) count
-            cursor.execute("SELECT COUNT(*) FROM articles WHERE is_duplicate = FALSE")
-            unique = cursor.fetchone()[0]
+            cursor.execute("SELECT COUNT(*) as count FROM articles WHERE is_duplicate = FALSE")
+            unique = get_scalar(cursor.fetchone(), "count")
 
             # By source
             cursor.execute(
