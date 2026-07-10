@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Language } from "@/lib/types/news";
 import { siteConfig } from "@/config/site";
 
@@ -7,6 +10,13 @@ interface HeaderProps {
 }
 
 export function Header({ locale }: HeaderProps) {
+  const pathname = usePathname();
+
+  // Replace locale in current path for language switching
+  const getLocalizedPath = (newLocale: Language) => {
+    return pathname.replace(/^\/[^\/]+/, `/${newLocale}`);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
@@ -68,7 +78,7 @@ export function Header({ locale }: HeaderProps) {
           {/* Language Toggle */}
           <div className="flex items-center space-x-2" role="group" aria-label="Language selection">
             <Link
-              href="/en"
+              href={getLocalizedPath('en')}
               className={`min-h-[44px] min-w-[44px] flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded transition-colors duration-200
                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2
                          cursor-pointer ${
@@ -82,7 +92,7 @@ export function Header({ locale }: HeaderProps) {
               EN
             </Link>
             <Link
-              href="/or"
+              href={getLocalizedPath('or')}
               className={`min-h-[44px] min-w-[44px] flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded transition-colors duration-200
                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2
                          cursor-pointer ${

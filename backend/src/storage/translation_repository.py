@@ -119,7 +119,11 @@ class TranslationRepository:
             summary_111=row["summary_111"],
             summary_250=row["summary_250"],
             model_used=row["model_used"],
-            translated_at=datetime.fromisoformat(row["translated_at"]),
+            translated_at=(
+                row["translated_at"]
+                if isinstance(row["translated_at"], datetime)
+                else datetime.fromisoformat(row["translated_at"])
+            ),
         )
 
     @staticmethod
@@ -160,7 +164,11 @@ class TranslationRepository:
                     summary_111=row["summary_111"],
                     summary_250=row["summary_250"],
                     model_used=row["model_used"],
-                    translated_at=datetime.fromisoformat(row["translated_at"]),
+                    translated_at=(
+                row["translated_at"]
+                if isinstance(row["translated_at"], datetime)
+                else datetime.fromisoformat(row["translated_at"])
+            ),
                 )
             )
 
@@ -171,6 +179,64 @@ class TranslationRepository:
         )
 
         return translations
+
+    @staticmethod
+    def get_translations_by_briefs(brief_ids: list[str]) -> dict[str, list[Translation]]:
+        """Get all translations for multiple briefs in one query.
+
+        Args:
+            brief_ids: List of brief IDs
+
+        Returns:
+            Dictionary mapping brief_id to list of translations
+        """
+        if not brief_ids:
+            return {}
+
+        with get_db_connection() as conn:
+            cursor = conn.cursor()
+            ph = get_placeholder()
+            placeholders = ",".join([ph] * len(brief_ids))
+            cursor.execute(
+                f"""
+                SELECT id, brief_id, language, title,
+                       summary_30, summary_111, summary_250,
+                       model_used, translated_at
+                FROM translations
+                WHERE brief_id IN ({placeholders})
+                ORDER BY brief_id, translated_at DESC
+                """,
+                tuple(brief_ids),
+            )
+            rows = cursor.fetchall()
+
+        # Group translations by brief_id
+        translations_by_brief: dict[str, list[Translation]] = {bid: [] for bid in brief_ids}
+        for row in rows:
+            translation = Translation(
+                id=row["id"],
+                brief_id=row["brief_id"],
+                language=Language(row["language"]),
+                title=row["title"],
+                summary_30=row["summary_30"],
+                summary_111=row["summary_111"],
+                summary_250=row["summary_250"],
+                model_used=row["model_used"],
+                translated_at=(
+                    row["translated_at"]
+                    if isinstance(row["translated_at"], datetime)
+                    else datetime.fromisoformat(row["translated_at"])
+                ),
+            )
+            translations_by_brief[row["brief_id"]].append(translation)
+
+        logger.debug(
+            "repository.translations_by_briefs_fetched",
+            brief_count=len(brief_ids),
+            translation_count=len(rows),
+        )
+
+        return translations_by_brief
 
     @staticmethod
     def get_translations_by_language(language: Language, limit: int = 50) -> list[Translation]:
@@ -212,7 +278,11 @@ class TranslationRepository:
                     summary_111=row["summary_111"],
                     summary_250=row["summary_250"],
                     model_used=row["model_used"],
-                    translated_at=datetime.fromisoformat(row["translated_at"]),
+                    translated_at=(
+                row["translated_at"]
+                if isinstance(row["translated_at"], datetime)
+                else datetime.fromisoformat(row["translated_at"])
+            ),
                 )
             )
 
