@@ -3,10 +3,10 @@
 
 set -o errexit
 
-# Install uv
-pip install uv
+# Upgrade pip
+pip install --upgrade pip
 
-# Install dependencies
-uv pip install --system -r pyproject.toml
+# Install dependencies from requirements.txt
+pip install -r requirements.txt
 
 echo "Build completed successfully!"
