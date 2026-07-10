@@ -4,7 +4,7 @@ from datetime import datetime
 
 import structlog
 
-from src.core.database import get_db_connection
+from src.core.database import get_db_connection, get_placeholder
 from src.core.schemas import RawArticle
 
 logger = structlog.get_logger()
@@ -21,17 +21,18 @@ class ArticleRepository:
             article: RawArticle to insert
 
         Raises:
-            sqlite3.IntegrityError: If article with same ID already exists
+            IntegrityError: If article with same ID already exists
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 INSERT INTO articles (
                     id, source_url, source_name, source_type,
                     title, content, published_at, fetched_at,
                     content_hash, is_duplicate
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES ({ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph})
                 """,
                 (
                     article.id,
@@ -97,13 +98,14 @@ class ArticleRepository:
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 SELECT id, source_url, source_name, source_type,
                        title, content, published_at, fetched_at,
                        content_hash, is_duplicate
                 FROM articles
-                WHERE id = ?
+                WHERE id = {ph}
                 """,
                 (article_id,),
             )
@@ -137,15 +139,16 @@ class ArticleRepository:
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 SELECT id, source_url, source_name, source_type,
                        title, content, published_at, fetched_at,
                        content_hash, is_duplicate
                 FROM articles
-                WHERE is_duplicate = 0
+                WHERE is_duplicate = FALSE
                 ORDER BY published_at DESC
-                LIMIT ?
+                LIMIT {ph}
                 """,
                 (limit,),
             )
@@ -187,7 +190,7 @@ class ArticleRepository:
             total = cursor.fetchone()[0]
 
             # Unique (non-duplicate) count
-            cursor.execute("SELECT COUNT(*) FROM articles WHERE is_duplicate = 0")
+            cursor.execute("SELECT COUNT(*) FROM articles WHERE is_duplicate = FALSE")
             unique = cursor.fetchone()[0]
 
             # By source
@@ -195,7 +198,7 @@ class ArticleRepository:
                 """
                 SELECT source_name, COUNT(*) as count
                 FROM articles
-                WHERE is_duplicate = 0
+                WHERE is_duplicate = FALSE
                 GROUP BY source_name
                 ORDER BY count DESC
                 """

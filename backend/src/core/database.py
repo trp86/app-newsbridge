@@ -19,6 +19,15 @@ def _use_postgres() -> bool:
     return bool(settings.database_url)
 
 
+def get_placeholder() -> str:
+    """Get the correct SQL placeholder for the current database.
+
+    Returns:
+        '%s' for Postgres, '?' for SQLite
+    """
+    return "%s" if _use_postgres() else "?"
+
+
 @contextmanager
 def get_db_connection() -> Generator[Any, None, None]:
     """Context manager for database connections (Postgres or SQLite).

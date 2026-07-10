@@ -4,7 +4,7 @@ from datetime import datetime
 
 import structlog
 
-from src.core.database import get_db_connection
+from src.core.database import get_db_connection, get_placeholder
 from src.core.schemas import Brief
 
 logger = structlog.get_logger()
@@ -25,13 +25,14 @@ class BriefRepository:
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 INSERT INTO briefs (
                     id, article_id, title,
                     summary_30, summary_111, summary_250,
                     category, quality_score, model_used, processed_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES ({ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph})
                 """,
                 (
                     brief.id,
@@ -93,13 +94,14 @@ class BriefRepository:
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 SELECT id, article_id, title,
                        summary_30, summary_111, summary_250,
                        category, quality_score, model_used, processed_at
                 FROM briefs
-                WHERE id = ?
+                WHERE id = {ph}
                 """,
                 (brief_id,),
             )
@@ -133,14 +135,15 @@ class BriefRepository:
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 SELECT id, article_id, title,
                        summary_30, summary_111, summary_250,
                        category, quality_score, model_used, processed_at
                 FROM briefs
                 ORDER BY processed_at DESC
-                LIMIT ?
+                LIMIT {ph}
                 """,
                 (limit,),
             )

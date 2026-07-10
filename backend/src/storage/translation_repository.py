@@ -4,7 +4,7 @@ from datetime import datetime
 
 import structlog
 
-from src.core.database import get_db_connection
+from src.core.database import get_db_connection, get_placeholder
 from src.core.schemas import Language, Translation
 
 logger = structlog.get_logger()
@@ -25,13 +25,14 @@ class TranslationRepository:
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 INSERT INTO translations (
                     id, brief_id, language, title,
                     summary_30, summary_111, summary_250,
                     model_used, translated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES ({ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph}, {ph})
                 """,
                 (
                     translation.id,
@@ -93,13 +94,14 @@ class TranslationRepository:
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 SELECT id, brief_id, language, title,
                        summary_30, summary_111, summary_250,
                        model_used, translated_at
                 FROM translations
-                WHERE id = ?
+                WHERE id = {ph}
                 """,
                 (translation_id,),
             )
@@ -132,13 +134,14 @@ class TranslationRepository:
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 SELECT id, brief_id, language, title,
                        summary_30, summary_111, summary_250,
                        model_used, translated_at
                 FROM translations
-                WHERE brief_id = ?
+                WHERE brief_id = {ph}
                 ORDER BY translated_at DESC
                 """,
                 (brief_id,),
@@ -182,15 +185,16 @@ class TranslationRepository:
         """
         with get_db_connection() as conn:
             cursor = conn.cursor()
+            ph = get_placeholder()
             cursor.execute(
-                """
+                f"""
                 SELECT id, brief_id, language, title,
                        summary_30, summary_111, summary_250,
                        model_used, translated_at
                 FROM translations
-                WHERE language = ?
+                WHERE language = {ph}
                 ORDER BY translated_at DESC
-                LIMIT ?
+                LIMIT {ph}
                 """,
                 (language.value, limit),
             )
