@@ -1,10 +1,11 @@
-"""SQLite database connection and initialization."""
+"""Database connection and initialization (Postgres/SQLite)."""
 
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Generator
+from typing import Any, Generator
 
+import psycopg
 import structlog
 
 from src.core.config import get_settings
@@ -12,12 +13,18 @@ from src.core.config import get_settings
 logger = structlog.get_logger()
 
 
+def _use_postgres() -> bool:
+    """Check if Postgres should be used based on configuration."""
+    settings = get_settings()
+    return bool(settings.database_url)
+
+
 @contextmanager
-def get_db_connection() -> Generator[sqlite3.Connection, None, None]:
-    """Context manager for SQLite database connections.
+def get_db_connection() -> Generator[Any, None, None]:
+    """Context manager for database connections (Postgres or SQLite).
 
     Yields:
-        SQLite connection with row factory enabled
+        Database connection with appropriate configuration
 
     Example:
         with get_db_connection() as conn:
@@ -26,8 +33,15 @@ def get_db_connection() -> Generator[sqlite3.Connection, None, None]:
             rows = cursor.fetchall()
     """
     settings = get_settings()
-    conn = sqlite3.connect(settings.database_path)
-    conn.row_factory = sqlite3.Row
+
+    if _use_postgres():
+        # Neon Postgres connection
+        conn = psycopg.connect(settings.database_url)
+        conn.row_factory = psycopg.rows.dict_row
+    else:
+        # SQLite fallback
+        conn = sqlite3.connect(settings.database_path)
+        conn.row_factory = sqlite3.Row
 
     try:
         yield conn
@@ -45,17 +59,18 @@ def get_db_connection() -> Generator[sqlite3.Connection, None, None]:
 def init_database() -> None:
     """Initialize database schema if not exists.
 
-    Creates the database file and executes schema.sql to create all tables
-    and indexes. Safe to call multiple times (uses IF NOT EXISTS).
+    Creates tables and indexes based on schema.sql.
+    Automatically detects Postgres or SQLite and adjusts schema.
 
     Raises:
         FileNotFoundError: If schema.sql file not found
-        sqlite3.Error: If database initialization fails
+        DatabaseError: If database initialization fails
     """
     settings = get_settings()
 
-    # Create data directory if needed
-    settings.database_path.parent.mkdir(parents=True, exist_ok=True)
+    if not _use_postgres():
+        # Create data directory for SQLite
+        settings.database_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Read schema file
     schema_path = Path("data/schema.sql")
@@ -64,13 +79,44 @@ def init_database() -> None:
 
     schema_sql = schema_path.read_text(encoding="utf-8")
 
+    # Adjust schema for Postgres
+    if _use_postgres():
+        schema_sql = _convert_schema_to_postgres(schema_sql)
+
     # Execute schema
     with get_db_connection() as conn:
-        conn.executescript(schema_sql)
+        cursor = conn.cursor()
+        cursor.execute(schema_sql)
         logger.info(
             "database.initialized",
-            database_path=str(settings.database_path),
+            database_type="postgres" if _use_postgres() else "sqlite",
         )
+
+
+def _convert_schema_to_postgres(schema_sql: str) -> str:
+    """Convert SQLite schema to Postgres-compatible schema.
+
+    Args:
+        schema_sql: SQLite schema SQL
+
+    Returns:
+        Postgres-compatible schema SQL
+    """
+    # Replace SQLite types and functions with Postgres equivalents
+    replacements = {
+        "BOOLEAN DEFAULT 0": "BOOLEAN DEFAULT FALSE",
+        "BOOLEAN DEFAULT 1": "BOOLEAN DEFAULT TRUE",
+        "TIMESTAMP DEFAULT CURRENT_TIMESTAMP": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+        "INTEGER": "INTEGER",
+        "REAL": "NUMERIC",
+        "TEXT": "TEXT",
+    }
+
+    result = schema_sql
+    for old, new in replacements.items():
+        result = result.replace(old, new)
+
+    return result
 
 
 def check_database_health() -> dict[str, int]:
@@ -98,7 +144,8 @@ def check_database_health() -> dict[str, int]:
         cursor = conn.cursor()
         for table in tables:
             cursor.execute(f"SELECT COUNT(*) FROM {table}")
-            count = cursor.fetchone()[0]
+            result = cursor.fetchone()
+            count = result[0] if isinstance(result, tuple) else result["count"]
             health[table] = count
 
     logger.info("database.health_check", **health)

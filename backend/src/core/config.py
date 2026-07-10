@@ -35,9 +35,13 @@ class Settings(BaseSettings):
     telegram_channel_id: str = Field(description="Telegram channel ID (e.g., @channelname)")
 
     # Database
+    database_url: str = Field(
+        default="",
+        description="Database URL (Neon Postgres or SQLite). Example: postgresql://user:pass@host/db",
+    )
     database_path: Path = Field(
         default=Path("data/brief.db"),
-        description="SQLite database path",
+        description="SQLite database path (fallback if database_url not set)",
     )
 
     # Logging

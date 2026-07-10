@@ -1,5 +1,5 @@
 -- Global Knowledge Brief Database Schema
--- Database: SQLite 3
+-- Compatible with PostgreSQL (Neon) and SQLite
 -- Created: 2026-07-04
 
 -- Raw articles from RSS feeds
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS articles (
     published_at TIMESTAMP NOT NULL,
     fetched_at TIMESTAMP NOT NULL,
     content_hash TEXT NOT NULL,
-    is_duplicate BOOLEAN DEFAULT 0,
+    is_duplicate BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS briefs (
     summary_111 TEXT NOT NULL,
     summary_250 TEXT NOT NULL,
     category TEXT NOT NULL,
-    quality_score REAL NOT NULL CHECK(quality_score >= 0 AND quality_score <= 1),
+    quality_score NUMERIC NOT NULL CHECK(quality_score >= 0 AND quality_score <= 1),
     model_used TEXT NOT NULL,
     processed_at TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS api_logs (
     operation TEXT NOT NULL CHECK(operation IN ('summarize', 'translate')),
     input_tokens INTEGER,
     output_tokens INTEGER,
-    cost_usd REAL,
+    cost_usd NUMERIC,
     latency_ms INTEGER,
     success BOOLEAN NOT NULL,
     error_message TEXT,
