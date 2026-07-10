@@ -114,6 +114,10 @@ class ArticleRepository:
         if not row:
             return None
 
+        # Handle datetime: Postgres returns datetime objects, SQLite returns strings
+        published_at = row["published_at"] if isinstance(row["published_at"], datetime) else datetime.fromisoformat(row["published_at"])
+        fetched_at = row["fetched_at"] if isinstance(row["fetched_at"], datetime) else datetime.fromisoformat(row["fetched_at"])
+
         return RawArticle(
             id=row["id"],
             source_url=row["source_url"],
@@ -121,8 +125,8 @@ class ArticleRepository:
             source_type=row["source_type"],
             title=row["title"],
             content=row["content"],
-            published_at=datetime.fromisoformat(row["published_at"]),
-            fetched_at=datetime.fromisoformat(row["fetched_at"]),
+            published_at=published_at,
+            fetched_at=fetched_at,
             content_hash=row["content_hash"],
             is_duplicate=bool(row["is_duplicate"]),
         )
@@ -156,6 +160,10 @@ class ArticleRepository:
 
         articles = []
         for row in rows:
+            # Handle datetime: Postgres returns datetime objects, SQLite returns strings
+            published_at = row["published_at"] if isinstance(row["published_at"], datetime) else datetime.fromisoformat(row["published_at"])
+            fetched_at = row["fetched_at"] if isinstance(row["fetched_at"], datetime) else datetime.fromisoformat(row["fetched_at"])
+
             articles.append(
                 RawArticle(
                     id=row["id"],
@@ -164,8 +172,8 @@ class ArticleRepository:
                     source_type=row["source_type"],
                     title=row["title"],
                     content=row["content"],
-                    published_at=datetime.fromisoformat(row["published_at"]),
-                    fetched_at=datetime.fromisoformat(row["fetched_at"]),
+                    published_at=published_at,
+                    fetched_at=fetched_at,
                     content_hash=row["content_hash"],
                     is_duplicate=bool(row["is_duplicate"]),
                 )
