@@ -72,8 +72,9 @@ def init_database() -> None:
         # Create data directory for SQLite
         settings.database_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Read schema file
-    schema_path = Path("data/schema.sql")
+    # Read schema file (relative to project root)
+    current_dir = Path(__file__).parent
+    schema_path = current_dir.parent.parent / "data" / "schema.sql"
     if not schema_path.exists():
         raise FileNotFoundError(f"Schema file not found: {schema_path}")
 
@@ -86,7 +87,12 @@ def init_database() -> None:
     # Execute schema
     with get_db_connection() as conn:
         cursor = conn.cursor()
-        cursor.execute(schema_sql)
+        if _use_postgres():
+            # Postgres: execute the entire script at once
+            cursor.execute(schema_sql)
+        else:
+            # SQLite: use executescript for multiple statements
+            cursor.executescript(schema_sql)
         logger.info(
             "database.initialized",
             database_type="postgres" if _use_postgres() else "sqlite",
@@ -145,7 +151,12 @@ def check_database_health() -> dict[str, int]:
         for table in tables:
             cursor.execute(f"SELECT COUNT(*) FROM {table}")
             result = cursor.fetchone()
-            count = result[0] if isinstance(result, tuple) else result["count"]
+            if _use_postgres():
+                # Postgres with dict_row returns a dict
+                count = result["count"] if isinstance(result, dict) else result[0]
+            else:
+                # SQLite with Row factory
+                count = result[0]
             health[table] = count
 
     logger.info("database.health_check", **health)
