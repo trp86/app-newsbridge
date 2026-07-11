@@ -1,5 +1,6 @@
 """FastAPI server for NewsBridge."""
 
+import os
 from datetime import datetime
 from typing import Optional
 
@@ -20,18 +21,23 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# Get allowed origins from environment or use defaults
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "").split(",") if os.getenv("ALLOWED_ORIGINS") else [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:3002",
+    "http://localhost:3003",
+    "http://localhost:5173",  # Vite dev server
+]
+
 # Configure CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://localhost:3002",
-        "http://localhost:3003",
-    ],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_origin_regex=r"https://.*\.netlify\.app$|https://.*\.vercel\.app$",  # Allow Netlify and Vercel
 )
 
 
