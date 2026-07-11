@@ -110,6 +110,13 @@ class BriefRepository:
         if not row:
             return None
 
+        # Handle datetime: Postgres returns datetime objects, SQLite returns strings
+        processed_at = (
+            row["processed_at"]
+            if isinstance(row["processed_at"], datetime)
+            else datetime.fromisoformat(row["processed_at"])
+        )
+
         return Brief(
             id=row["id"],
             article_id=row["article_id"],
@@ -120,7 +127,7 @@ class BriefRepository:
             category=row["category"],
             quality_score=row["quality_score"],
             model_used=row["model_used"],
-            processed_at=datetime.fromisoformat(row["processed_at"]),
+            processed_at=processed_at,
         )
 
     @staticmethod
@@ -151,6 +158,16 @@ class BriefRepository:
 
         briefs = []
         for row in rows:
+            # Handle datetime: Postgres returns datetime objects, SQLite returns strings
+            if row["processed_at"] is None:
+                continue  # Skip briefs with no processed_at
+
+            processed_at = (
+                row["processed_at"]
+                if isinstance(row["processed_at"], datetime)
+                else datetime.fromisoformat(row["processed_at"])
+            )
+
             briefs.append(
                 Brief(
                     id=row["id"],
@@ -162,7 +179,7 @@ class BriefRepository:
                     category=row["category"],
                     quality_score=row["quality_score"],
                     model_used=row["model_used"],
-                    processed_at=datetime.fromisoformat(row["processed_at"]),
+                    processed_at=processed_at,
                 )
             )
 
